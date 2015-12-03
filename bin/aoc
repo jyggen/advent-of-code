@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+if (PHP_SAPI !== 'cli') {
+    echo 'Warning: Advent of Code may only be invoked from a command line', PHP_EOL;
+}
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Boo\AdventOfCode\Commands;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+if (function_exists('date_default_timezone_set') === true && function_exists('date_default_timezone_get') === true) {
+    date_default_timezone_set(@date_default_timezone_get());
+}
+
+error_reporting(-1);
+
+if (function_exists('ini_set') === true) {
+    @ini_set('display_errors', 1);
+}
+
+$output      = new ConsoleOutput;
+$input       = new ArgvInput($_SERVER['argv']);
+$application = new Application;
+
+$application->add(new Commands\DayOneCommand);
+$application->add(new Commands\DayTwoCommand);
+$application->add(new Commands\DayThreeCommand);
+
+$application->run($input, $output);
