@@ -38,17 +38,25 @@ class DayOneCommand extends DayCommandAbstract
 
     protected function perform(array &$input)
     {
+        // He starts on the ground floor (floor 0) ..
         $floor         = 0;
         $firstBasement = null;
 
+        // .. and then follows the instructions one character at a time.
         foreach ($input as $key => $step) {
+            // An opening parenthesis, (, means he should go up one floor,
+            // and a closing parenthesis, ), means he should go down one floor.
             $floor = ($step === '(') ? $floor + 1 : $floor - 1;
 
+            // Find the position of the first character that
+            // causes him to enter the basement (floor -1).
             if ($floor === -1 && $firstBasement === null) {
                 $firstBasement = $key + 1;
             }
         }
 
+        // 0 => To what floor do the instructions take Santa?
+        // 1 => What is the position of the character that causes Santa to first enter the basement?
         return [$floor, $firstBasement];
     }
 }
