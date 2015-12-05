@@ -8,6 +8,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class DayCommandAbstract extends Command
 {
+    protected $input;
+    protected $output;
+
     protected $testDataOne = [];
     protected $testDataTwo = [];
 
@@ -19,12 +22,13 @@ abstract class DayCommandAbstract extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        unset($input);
+        $this->input  = $input;
+        $this->output = $output;
 
         $output->getFormatter()->setStyle('fail', new OutputFormatterStyle('red'));
         $output->getFormatter()->setStyle('pass', new OutputFormatterStyle('green'));
 
-        if ($this->runTests($output, 1) === false || $this->runTests($output, 2) === false) {
+        if ($this->runTests(1) === false || $this->runTests(2) === false) {
             return 1;
         }
 
@@ -36,28 +40,29 @@ abstract class DayCommandAbstract extends Command
         $output->writeln('Answer for <comment>Step #2</comment>: <pass>'.$result[1].'</pass>');
     }
 
-    protected function runTests(OutputInterface $output, $testNumber)
+    protected function runTests($testNumber)
     {
         $tests = ($testNumber === 1) ? $this->testDataOne : $this->testDataTwo;
 
-        $output->write('Running tests for <comment>Step #'.$testNumber.'</comment>: ');
+        $this->output->write('Running tests for <comment>Step #'.$testNumber.'</comment>: ');
 
         foreach ($tests as $input => $expected) {
             $input  = $this->normalizeData([$input]);
             $result = $this->perform($input);
 
             if ($result[$testNumber - 1] !== $expected) {
-                $output->writeln('<fail>✘</fail>');
-                $output->writeln(vsprintf('  Failed asserting that %s is identical to %s.', [
+                $this->output->writeln('<fail>✘</fail>');
+                $this->output->writeln(vsprintf('  Failed asserting that %s is identical to %s on input %s.', [
                     '<fail>'.$result[$testNumber - 1].'</fail>',
                     '<pass>'.$expected.'</pass>',
+                    '<comment>'.$input[0].'</comment>',
                 ]));
 
                 return false;
             }
         }
 
-        $output->writeln('<pass>✔</pass>');
+        $this->output->writeln('<pass>✔</pass>');
 
         return true;
     }

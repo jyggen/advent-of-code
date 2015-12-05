@@ -28,5 +28,7 @@ $application = new Application;
 $application->add(new Commands\DayOneCommand);
 $application->add(new Commands\DayTwoCommand);
 $application->add(new Commands\DayThreeCommand);
+$application->add(new Commands\DayFourCommand);
+$application->add(new Commands\DayFiveCommand);
 
 $application->run($input, $output);
