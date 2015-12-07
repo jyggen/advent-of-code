@@ -31,5 +31,6 @@ $application->add(new Commands\DayThreeCommand);
 $application->add(new Commands\DayFourCommand);
 $application->add(new Commands\DayFiveCommand);
 $application->add(new Commands\DaySixCommand);
+$application->add(new Commands\DaySevenCommand);
 
 $application->run($input, $output);

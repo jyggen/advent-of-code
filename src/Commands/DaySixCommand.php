@@ -32,8 +32,6 @@ class DaySixCommand extends DayCommandAbstract
 
     protected function perform(array &$input)
     {
-
-
         return [$this->handleLights($input), $this->handleLightsBetter($input)];
     }
 
