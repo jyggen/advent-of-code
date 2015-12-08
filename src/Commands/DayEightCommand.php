@@ -42,9 +42,8 @@ class DayEightCommand extends DayCommandAbstract
         foreach ($input as $string) {
             $literalString = trim($string);
             $newString     = '"'.addslashes($literalString).'"';
-            $memoryString  = substr(stripslashes(preg_replace_callback('@\\\x([0-9a-f]{2})@', function($m) {
-                return chr(hexdec($m[1]));
-            }, $literalString)), 1, -1);
+
+            eval('$memoryString = '.$literalString.';');
 
             $literalSize += mb_strlen($literalString);
             $memorySize  += mb_strlen($memoryString, '8bit');
