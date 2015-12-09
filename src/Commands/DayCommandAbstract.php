@@ -33,11 +33,16 @@ abstract class DayCommandAbstract extends Command
         }
 
         $normalized = $this->normalizeData($this->loadInputData());
+        $startTime  = microtime(true);
         $result     = $this->perform($normalized);
+        $stopTime   = microtime(true);
 
         $output->writeln('');
         $output->writeln('Answer for <comment>Step #1</comment>: <pass>'.$result[0].'</pass>');
         $output->writeln('Answer for <comment>Step #2</comment>: <pass>'.$result[1].'</pass>');
+        $output->writeln('');
+        $output->writeln('Total execution time: <pass>'.round($stopTime - $startTime, 2).'s</pass>');
+        $output->writeln('Total memory usage: <pass>'.get_memory_usage().'</pass>');
     }
 
     protected function runTests($testNumber)
