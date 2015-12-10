@@ -52,15 +52,15 @@ abstract class DayCommandAbstract extends Command
         $this->output->write('Running tests for <comment>Step #'.$testNumber.'</comment>: ');
 
         foreach ($tests as $input => $expected) {
-            $input  = $this->normalizeData([$input]);
-            $result = $this->perform($input);
+            $normalInput = $this->normalizeData([$input]);
+            $result      = $this->performTest($normalInput);
 
             if ($result[$testNumber - 1] !== $expected) {
                 $this->output->writeln('<fail>✘</fail>');
                 $this->output->writeln(vsprintf('  Failed asserting that %s is identical to %s on input %s.', [
                     '<fail>'.$result[$testNumber - 1].'</fail>',
                     '<pass>'.$expected.'</pass>',
-                    '<comment>'.$input[0].'</comment>',
+                    '<comment>'.$input.'</comment>',
                 ]));
 
                 return false;
@@ -75,6 +75,11 @@ abstract class DayCommandAbstract extends Command
     protected function loadInputData()
     {
         return parse_input_file($this->getDayNumber().'.input');
+    }
+
+    protected function performTest(array &$input)
+    {
+        return $this->perform($input);
     }
 
     abstract protected function getDayNumber();

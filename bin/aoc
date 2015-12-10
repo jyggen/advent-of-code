@@ -16,6 +16,7 @@ if (function_exists('date_default_timezone_set') === true && function_exists('da
 }
 
 error_reporting(-1);
+ini_set('memory_limit', -1);
 
 if (function_exists('ini_set') === true) {
     @ini_set('display_errors', 1);
@@ -33,5 +34,7 @@ $application->add(new Commands\DayFiveCommand);
 $application->add(new Commands\DaySixCommand);
 $application->add(new Commands\DaySevenCommand);
 $application->add(new Commands\DayEightCommand);
+$application->add(new Commands\DayNineCommand);
+$application->add(new Commands\DayTenCommand);
 
 $application->run($input, $output);
