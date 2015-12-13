@@ -4,8 +4,13 @@ namespace Boo\AdventOfCode\Commands;
 class DayFourCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        'abcdef'  => 609043,
-        'pqrstuv' => 1048970,
+        [
+            'input'  => ['abcdef'],
+            'output' => 609043,
+        ], [
+            'input'  => ['pqrstuv'],
+            'output' => 1048970,
+        ],
     ];
 
     protected $testDataTwo = [

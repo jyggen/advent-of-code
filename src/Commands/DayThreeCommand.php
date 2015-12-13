@@ -4,15 +4,29 @@ namespace Boo\AdventOfCode\Commands;
 class DayThreeCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '>'          => 2,
-        '^>v<'       => 4,
-        '^v^v^v^v^v' => 2,
+        [
+            'input'  => ['>'],
+            'output' => 2,
+        ], [
+            'input'  => ['^>v<'],
+            'output' => 4,
+        ], [
+            'input'  => ['^v^v^v^v^v'],
+            'output' => 2,
+        ],
     ];
 
     protected $testDataTwo = [
-        '^v'         => 3,
-        '^>v<'       => 3,
-        '^v^v^v^v^v' => 11,
+        [
+            'input'  => ['^v'],
+            'output' => 3,
+        ], [
+            'input'  => ['^>v<'],
+            'output' => 3,
+        ], [
+            'input'  => ['^v^v^v^v^v'],
+            'output' => 11,
+        ],
     ];
 
     protected function configure()

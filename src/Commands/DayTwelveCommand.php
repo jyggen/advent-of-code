@@ -4,21 +4,57 @@ namespace Boo\AdventOfCode\Commands;
 class DayTwelveCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '[1,2,3]'              => 6,
-        '{"a":2,"b":4}'        => 6,
-        '[[[3]]]'              => 3,
-        '{"a":{"b":4},"c":-1}' => 3,
-        '{"a":[-1,1]}'         => 0,
-        '[-1,{"a":1}]'         => 0,
-        '[]'                   => 0,
-        '{}'                   => 0,
+        [
+            'input'  => ['[1,2,3]'],
+            'output' => 6,
+        ],
+        [
+            'input'  => ['{"a":2,"b":4}'],
+            'output' => 6,
+        ],
+        [
+            'input'  => ['[[[3]]]'],
+            'output' => 3,
+        ],
+        [
+            'input'  => ['{"a":{"b":4},"c":-1}'],
+            'output' => 3,
+        ],
+        [
+            'input'  => ['{"a":[-1,1]}'],
+            'output' => 0,
+        ],
+        [
+            'input'  => ['[-1,{"a":1}]'],
+            'output' => 0,
+        ],
+        [
+            'input'  => ['[]'],
+            'output' => 0,
+        ],
+        [
+            'input'  => ['{}'],
+            'output' => 0,
+        ],
     ];
 
     protected $testDataTwo = [
-        '[1,2,3]'                         => 6,
-        '[1,{"c":"red","b":2},3]'         => 4,
-        '{"d":"red","e":[1,2,3,4],"f":5}' => 0,
-        '[1,"red",5]'                     => 6,
+        [
+            'input'  => ['[1,2,3]'],
+            'output' => 6,
+        ],
+        [
+            'input'  => ['[1,{"c":"red","b":2},3]'],
+            'output' => 4,
+        ],
+        [
+            'input'  => ['{"d":"red","e":[1,2,3,4],"f":5}'],
+            'output' => 0,
+        ],
+        [
+            'input'  => ['[1,"red",5]'],
+            'output' => 6,
+        ],
 
     ];
 

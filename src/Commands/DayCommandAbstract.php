@@ -51,16 +51,16 @@ abstract class DayCommandAbstract extends Command
 
         $this->output->write('Running tests for <comment>Step #'.$testNumber.'</comment>: ');
 
-        foreach ($tests as $input => $expected) {
-            $normalInput = $this->normalizeData([$input]);
-            $result      = $this->performTest($normalInput);
+        foreach ($tests as $key => $test) {
+            $input  = $this->normalizeData($test['input']);
+            $result = $this->performTest($input);
 
-            if ($result[$testNumber - 1] !== $expected) {
+            if ($result[$testNumber - 1] !== $test['output']) {
                 $this->output->writeln('<fail>✘</fail>');
                 $this->output->writeln(vsprintf('  Failed asserting that %s is identical to %s on input %s.', [
                     '<fail>'.$result[$testNumber - 1].'</fail>',
-                    '<pass>'.$expected.'</pass>',
-                    '<comment>'.$input.'</comment>',
+                    '<pass>'.$test['output'].'</pass>',
+                    '<comment>'.((is_array($test['input']) === true) ? '#'.($key + 1) : $test['input']).'</comment>',
                 ]));
 
                 return false;

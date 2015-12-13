@@ -4,14 +4,29 @@ namespace Boo\AdventOfCode\Commands;
 class DaySixCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        'turn on 0,0 through 999,999'     => 1000000,
-        'toggle 0,0 through 999,0'        => 1000,
-        'turn on 499,499 through 500,500' => 4,
+        [
+            'input'  => ['turn on 0,0 through 999,999'],
+            'output' => 1000000,
+        ],
+        [
+            'input'  => ['toggle 0,0 through 999,0'],
+            'output' => 1000,
+        ],
+        [
+            'input'  => ['turn on 499,499 through 500,500'],
+            'output' => 4,
+        ],
     ];
 
     protected $testDataTwo = [
-        'turn on 0,0 through 0,0'    => 1,
-        'toggle 0,0 through 999,999' => 2000000,
+        [
+            'input'  => ['turn on 0,0 through 0,0'],
+            'output' => 1,
+        ],
+        [
+            'input'  => ['toggle 0,0 through 999,999'],
+            'output' => 2000000,
+        ],
     ];
 
     protected function configure()

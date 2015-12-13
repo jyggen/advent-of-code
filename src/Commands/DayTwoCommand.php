@@ -4,13 +4,23 @@ namespace Boo\AdventOfCode\Commands;
 class DayTwoCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '2x3x4'  => 58,
-        '1x1x10' => 43,
+        [
+            'input'  => ['2x3x4'],
+            'output' => 58,
+        ], [
+            'input'  => ['1x1x10'],
+            'output' => 43,
+        ],
     ];
 
     protected $testDataTwo = [
-        '2x3x4'  => 34,
-        '1x1x10' => 14,
+        [
+            'input'  => ['2x3x4'],
+            'output' => 34,
+        ], [
+            'input'  => ['1x1x10'],
+            'output' => 14,
+        ],
     ];
 
     protected function configure()

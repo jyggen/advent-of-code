@@ -4,17 +4,41 @@ namespace Boo\AdventOfCode\Commands;
 class DayEightCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '""'         => 2,
-        '"abc"'      => 2,
-        '"aaa\"aaa"' => 3,
-        '"\x27"'     => 5,
+        [
+            'input'  => ['""'],
+            'output' => 2,
+        ],
+        [
+            'input'  => ['"abc"'],
+            'output' => 2,
+        ],
+        [
+            'input'  => ['"aaa\"aaa"'],
+            'output' => 3,
+        ],
+        [
+            'input'  => ['"\x27"'],
+            'output' => 5,
+        ],
     ];
 
     protected $testDataTwo = [
-        '""'         => 4,
-        '"abc"'      => 4,
-        '"aaa\"aaa"' => 6,
-        '"\x27"'     => 5,
+        [
+            'input'  => ['""'],
+            'output' => 4,
+        ],
+        [
+            'input'  => ['"abc"'],
+            'output' => 4,
+        ],
+        [
+            'input'  => ['"aaa\"aaa"'],
+            'output' => 6,
+        ],
+        [
+            'input'  => ['"\x27"'],
+            'output' => 5,
+        ],
     ];
 
     protected function configure()

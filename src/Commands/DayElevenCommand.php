@@ -4,8 +4,14 @@ namespace Boo\AdventOfCode\Commands;
 class DayElevenCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        'abcdefgh' => 'abcdffaa',
-        'ghijklmn' => 'ghjaabcc',
+        [
+            'input'  => ['abcdefgh'],
+            'output' => 'abcdffaa',
+        ],
+        [
+            'input'  => ['ghijklmn'],
+            'output' => 'ghjaabcc',
+        ],
     ];
 
     protected $testDataTwo = [

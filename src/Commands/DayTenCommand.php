@@ -4,11 +4,26 @@ namespace Boo\AdventOfCode\Commands;
 class DayTenCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '1'      => '11',
-        '11'     => '21',
-        '21'     => '1211',
-        '1211'   => '111221',
-        '111221' => '312211',
+        [
+            'input'  => ['1'],
+            'output' => '11',
+        ],
+        [
+            'input'  => ['11'],
+            'output' => '21',
+        ],
+        [
+            'input'  => ['21'],
+            'output' => '1211',
+        ],
+        [
+            'input'  => ['1211'],
+            'output' => '111221',
+        ],
+        [
+            'input'  => ['111221'],
+            'output' => '312211',
+        ],
     ];
 
     protected $testDataTwo = [

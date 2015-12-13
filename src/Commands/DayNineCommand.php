@@ -4,9 +4,25 @@ namespace Boo\AdventOfCode\Commands;
 class DayNineCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
+        [
+            'input'  => [
+                'London to Dublin = 464',
+                'London to Belfast = 518',
+                'Dublin to Belfast = 141',
+            ],
+            'output' => 605,
+        ],
     ];
 
     protected $testDataTwo = [
+        [
+            'input' => [
+                'London to Dublin = 464',
+                'London to Belfast = 518',
+                'Dublin to Belfast = 141',
+            ],
+            'output' => 982,
+        ],
     ];
 
     protected function configure()

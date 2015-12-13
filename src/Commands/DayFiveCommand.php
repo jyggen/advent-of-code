@@ -4,18 +4,38 @@ namespace Boo\AdventOfCode\Commands;
 class DayFiveCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        'ugknbfddgicrmopn' => 1,
-        'aaa'              => 1,
-        'jchzalrnumimnmhp' => 0,
-        'haegwjzuvuyypxyu' => 0,
-        'dvszwmarrgswjxmb' => 0,
+        [
+            'input'  => ['ugknbfddgicrmopn'],
+            'output' => 1,
+        ], [
+            'input'  => ['aaa'],
+            'output' => 1,
+        ], [
+            'input'  => ['jchzalrnumimnmhp'],
+            'output' => 0,
+        ], [
+            'input'  => ['haegwjzuvuyypxyu'],
+            'output' => 0,
+        ], [
+            'input'  => ['dvszwmarrgswjxmb'],
+            'output' => 0,
+        ],
     ];
 
     protected $testDataTwo = [
-        'qjhvhtzxzqqjkmpb'   => 1,
-        'xxyxx'              => 1,
-        'uurcxstgmygtbstg'   => 0,
-        'ieodomkazucvgmuy'   => 0,
+        [
+            'input'  => ['qjhvhtzxzqqjkmpb'],
+            'output' => 1,
+        ], [
+            'input'  => ['xxyxx'],
+            'output' => 1,
+        ], [
+            'input'  => ['uurcxstgmygtbstg'],
+            'output' => 0,
+        ], [
+            'input'  => ['ieodomkazucvgmuy'],
+            'output' => 0,
+        ],
     ];
 
     protected function configure()

@@ -4,20 +4,45 @@ namespace Boo\AdventOfCode\Commands;
 class DayOneCommand extends DayCommandAbstract
 {
     protected $testDataOne = [
-        '(())'    => 0,
-        '()()'    => 0,
-        '((('     => 3,
-        '(()(()(' => 3,
-        '))(((((' => 3,
-        '())'     => -1,
-        '))('     => -1,
-        ')))'     => -3,
-        ')())())' => -3,
+        [
+            'input'  => ['(())'],
+            'output' => 0,
+        ], [
+            'input'  => ['()()'],
+            'output' => 0,
+        ], [
+            'input'  => ['((('],
+            'output' => 3,
+
+        ], [
+            'input'  => ['(()(()('],
+            'output' => 3,
+        ], [
+            'input'  => ['))((((('],
+            'output' => 3,
+        ], [
+            'input'  => ['())'],
+            'output' => -1,
+        ], [
+            'input'  => ['))('],
+            'output' => -1,
+        ], [
+            'input'  => [')))'],
+            'output' => -3,
+        ], [
+            'input'  => [')())())'],
+            'output' => -3,
+        ],
     ];
 
     protected $testDataTwo = [
-        ')'     => 1,
-        '()())' => 5,
+        [
+            'input'  => [')'],
+            'output' => 1,
+        ], [
+            'input'  => ['()())'],
+            'output' => 5,
+        ],
     ];
 
     protected function configure()
