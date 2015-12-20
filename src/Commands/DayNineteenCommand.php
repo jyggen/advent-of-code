@@ -103,48 +103,4 @@ class DayNineteenCommand extends DayCommandAbstract
 
         return [count($molecules), $totalCount];
     }
-
-    protected function bruteforce($current, $expected, $replacements, $number = 0)
-    {
-        if ($number === 0) {
-            $this->lowest   = PHP_INT_MAX;
-            $this->deadends = [];
-        }
-
-        $number++;
-
-        if ($number > $this->lowest) {
-            return [];
-        }
-
-        if (isset($this->deadends[$current]) === true) {
-            return [];
-        }
-
-        $found = [];
-
-        foreach ($replacements as $to => $from) {
-            $position = 0;
-            while (($position = strpos($current, $to, $position)) !== false) {
-                $length    = strlen($to);
-                $prepend   = substr($current, 0, $position);
-                $append    = substr($current, $position + $length);
-                $newString = $prepend.$from.$append;
-                $position  = $position + $length;
-
-                if ($newString === $expected) {
-                    $this->lowest = min($this->lowest, $number);
-                    $found[]      = $number;
-                }
-
-                $found = array_merge($found, $this->bruteforce($newString, $expected, $replacements, $number));
-            }
-        }
-
-        if (empty($found) === true) {
-            $this->deadends[$current] = true;
-        }
-
-        return $found;
-    }
 }
