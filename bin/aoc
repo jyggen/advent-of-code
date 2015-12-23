@@ -47,5 +47,6 @@ $application->add(new Commands\DayEighteenCommand);
 $application->add(new Commands\DayNineteenCommand);
 $application->add(new Commands\DayTwentyCommand);
 $application->add(new Commands\DayTwentyOneCommand);
+$application->add(new Commands\DayTwentyTwoCommand);
 
 $application->run($input, $output);
