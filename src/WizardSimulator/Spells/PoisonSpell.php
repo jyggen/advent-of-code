@@ -12,16 +12,12 @@ class PoisonSpell extends SpellAbstract
         $boss->inflictDamage(3);
 
         if ($boss->isDead()) {
-            $this->output->writeln('Poison deals 3 damage. This kills the boss, and the player wins.');
             return;
         }
-
-        $this->output->writeln('Poison deals 3 damage; its timer is now '.$turns.'.');
     }
 
     public function cast(Player $player, Boss $boss, EffectTracker $effects)
     {
-        $this->output->writeln('Player casts Poison.');
         $player->reduceMana($this->getCost());
         $effects->add($this);
     }

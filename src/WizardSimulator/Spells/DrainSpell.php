@@ -14,7 +14,6 @@ class DrainSpell extends SpellAbstract
 
     public function cast(Player $player, Boss $boss, EffectTracker $effects)
     {
-        $this->output->writeln('Player casts Drain, dealing 2 damage, and healing 2 hit points.');
         $player->reduceMana($this->getCost());
         $player->giveHealth(2);
         $boss->inflictDamage(2);

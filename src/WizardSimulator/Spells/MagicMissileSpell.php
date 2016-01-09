@@ -14,7 +14,6 @@ class MagicMissileSpell extends SpellAbstract
 
     public function cast(Player $player, Boss $boss, EffectTracker $effects)
     {
-        $this->output->writeln('Player casts Magic Missile, dealing 4 damage.');
         $player->reduceMana($this->getCost());
         $boss->inflictDamage(4);
     }

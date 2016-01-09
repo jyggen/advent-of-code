@@ -2,7 +2,6 @@
 namespace Boo\AdventOfCode\WizardSimulator;
 
 use Boo\AdventOfCode\WizardSimulator\Spells;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class Player
 {
@@ -11,47 +10,47 @@ class Player
     protected $health;
     protected $mana;
     protected $manaSpent = 0;
-    protected $output;
+    protected $maxHealth;
     protected $recharge = 0;
     protected $shield = 0;
 
-    public function __construct($health, $mana, $recharge, $shield, $drain, OutputInterface $output)
+    public function __construct($health, $mana, $recharge, $shield, $drain)
     {
-        $this->drain    = $drain;
-        $this->health   = $health;
-        $this->mana     = $mana;
-        $this->output   = $output;
-        $this->recharge = $recharge;
-        $this->shield   = $shield;
+        $this->drain     = $drain;
+        $this->health    = $health;
+        $this->maxHealth = $health;
+        $this->mana      = $mana;
+        $this->recharge  = $recharge;
+        $this->shield    = $shield;
     }
 
     public function findBestSpellToCast(Boss $boss, EffectTracker $effectTracker)
     {
         if ($this->recharge > 0 && $effectTracker->has(Spells\RechargeSpell::class) === false && $this->mana >= 229 && $this->mana < 402) {
             $this->recharge--;
-            return new Spells\RechargeSpell($this->output);
+            return new Spells\RechargeSpell;
         }
 
         if ($this->shield > 0 && $effectTracker->has(Spells\ShieldSpell::class) === false && $this->health <= $boss->getDamage() * 3 && $this->mana >= 113) {
             $this->shield--;
-            return new Spells\ShieldSpell($this->output);
+            return new Spells\ShieldSpell;
         }
 
         if ($this->drain > 0 && $effectTracker->has(Spells\DrainSpell::class) === false && $this->mana >= 73) {
             $this->drain--;
-            return new Spells\DrainSpell($this->output);
+            return new Spells\DrainSpell;
         }
 
         if ($boss->getHealth() <= 8 && $this->mana >= 53) {
-            return new Spells\MagicMissileSpell($this->output);
+            return new Spells\MagicMissileSpell;
         }
 
         if ($effectTracker->has(Spells\PoisonSpell::class) === false && $this->mana >= 173) {
-            return new Spells\PoisonSpell($this->output);
+            return new Spells\PoisonSpell;
         }
 
         if ($this->mana >= 53) {
-            return new Spells\MagicMissileSpell($this->output);
+            return new Spells\MagicMissileSpell;
         }
 
         throw new OutOfManaException;
@@ -88,11 +87,6 @@ class Player
     public function isDead()
     {
         return $this->health <= 0;
-    }
-
-    public function printInfoLine()
-    {
-        $this->output->writeln('- Player has '.$this->health.' hit points, '.$this->armor.' armor, '.$this->mana.' mana');
     }
 
     public function reduceHealth($health)

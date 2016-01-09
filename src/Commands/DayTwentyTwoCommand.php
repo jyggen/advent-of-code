@@ -5,6 +5,7 @@ use Boo\AdventOfCode\WizardSimulator\Boss;
 use Boo\AdventOfCode\WizardSimulator\EffectTracker;
 use Boo\AdventOfCode\WizardSimulator\OutOfManaException;
 use Boo\AdventOfCode\WizardSimulator\Player;
+use Boo\AdventOfCode\WizardSimulator\PlayerTwo;
 use Boo\AdventOfCode\WizardSimulator\Spells;
 
 class DayTwentyTwoCommand extends DayCommandAbstract
@@ -71,7 +72,6 @@ class DayTwentyTwoCommand extends DayCommandAbstract
         $iterations       = 0;
 
         while (true) {
-            $this->output->writeln('--------------------------------------------------------------------------------');
             $iterations++;
 
             $player  = new Player($health, $mana, $numberOfRecharge, $numberOfShield, $numberOfDrain, $this->output);
@@ -81,10 +81,6 @@ class DayTwentyTwoCommand extends DayCommandAbstract
 
             try {
                 while (true) {
-                    $this->output->writeln('-- Player turn --');
-                    $player->printInfoLine();
-                    $boss->printInfoLine();
-
                     $effects->apply();
 
                     if ($boss->isDead()) {
@@ -93,13 +89,8 @@ class DayTwentyTwoCommand extends DayCommandAbstract
 
                     $spell    = $player->findBestSpellToCast($boss, $effects);
                     $spells[] = get_class($spell);
+
                     $spell->cast($player, $boss, $effects);
-
-                    $this->output->writeln('');
-                    $this->output->writeln('-- Boss turn --');
-                    $player->printInfoLine();
-                    $boss->printInfoLine();
-
                     $effects->apply();
 
                     if ($boss->isDead()) {
@@ -111,12 +102,9 @@ class DayTwentyTwoCommand extends DayCommandAbstract
                     if ($player->isDead()) {
                         break;
                     }
-
-                    $this->output->writeln('');
                 }
             } catch (OutOfManaException $e) {
                 $numberOfRecharge++;
-                $this->output->writeln('OUT OF MANA :(');
                 continue;
             }
 
@@ -126,16 +114,10 @@ class DayTwentyTwoCommand extends DayCommandAbstract
 
             if ($effects->has(Spells\ShieldSpell::class)) {
                 $numberOfDrain++;
-                $this->output->writeln('MORE DRAIN!');
             } else {
                 $numberOfShield++;
-                $this->output->writeln('MORE SHIELD!');
             }
         }
-
-        $this->output->writeln($numberOfRecharge);
-        $this->output->writeln($numberOfShield);
-        $this->output->writeln($numberOfDrain);
 
         return $player->getManaSpent();
     }
@@ -150,20 +132,15 @@ class DayTwentyTwoCommand extends DayCommandAbstract
         $shieldFailed     = true;
 
         while (true) {
-            $this->output->writeln('--------------------------------------------------------------------------------');
             $iterations++;
 
-            $player  = new Player($health, $mana, $numberOfRecharge, $numberOfShield, $numberOfDrain, $this->output);
+            $player  = new PlayerTwo($health, $mana, $numberOfRecharge, $numberOfShield, $numberOfDrain, $this->output);
             $boss    = new Boss($bossStats['Hit Points'], $bossStats['Damage'], $this->output);
             $effects = new EffectTracker($player, $boss);
             $spells  = [];
 
             try {
                 while (true) {
-                    $this->output->writeln('-- Player turn --');
-                    $player->printInfoLine();
-                    $boss->printInfoLine();
-
                     $player->reduceHealth(1);
 
                     if ($player->isDead()) {
@@ -178,13 +155,8 @@ class DayTwentyTwoCommand extends DayCommandAbstract
 
                     $spell    = $player->findBestSpellToCast($boss, $effects);
                     $spells[] = get_class($spell);
+
                     $spell->cast($player, $boss, $effects);
-
-                    $this->output->writeln('');
-                    $this->output->writeln('-- Boss turn --');
-                    $player->printInfoLine();
-                    $boss->printInfoLine();
-
                     $effects->apply();
 
                     if ($boss->isDead()) {
@@ -196,8 +168,6 @@ class DayTwentyTwoCommand extends DayCommandAbstract
                     if ($player->isDead()) {
                         break;
                     }
-
-                    $this->output->writeln('');
                 }
             } catch (OutOfManaException $e) {
                 $numberOfRecharge++;
@@ -218,10 +188,6 @@ class DayTwentyTwoCommand extends DayCommandAbstract
 
             $numberOfRecharge = 0;
         }
-
-        $this->output->writeln($numberOfRecharge);
-        $this->output->writeln($numberOfShield);
-        $this->output->writeln($numberOfDrain);
 
         return $player->getManaSpent();
     }

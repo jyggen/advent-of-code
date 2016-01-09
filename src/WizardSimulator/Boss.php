@@ -1,24 +1,20 @@
 <?php
 namespace Boo\AdventOfCode\WizardSimulator;
 
-use Symfony\Component\Console\Output\OutputInterface;
-
 class Boss
 {
     protected $damage;
     protected $health;
-    protected $output;
 
-    public function __construct($health, $damage, OutputInterface $output)
+    public function __construct($health, $damage)
     {
         $this->damage = $damage;
         $this->health = $health;
-        $this->output = $output;
     }
 
     public function attack(Player $player)
     {
-        $this->output->writeln('Boss attacks for '.$player->inflictDamage($this->damage).' damage.');
+        $player->inflictDamage($this->damage);
     }
 
     public function getDamage()
@@ -41,10 +37,5 @@ class Boss
     public function isDead()
     {
         return $this->health <= 0;
-    }
-
-    public function printInfoLine()
-    {
-        $this->output->writeln('- Boss has '.$this->health.' hit points');
     }
 }
