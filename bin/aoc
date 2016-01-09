@@ -50,5 +50,7 @@ $application->add(new Commands\DayTwentyOneCommand);
 $application->add(new Commands\DayTwentyTwoCommand);
 $application->add(new Commands\DayTwentyThreeCommand);
 $application->add(new Commands\DayTwentyFourCommand);
+$application->add(new Commands\DayTwentyFiveCommand);
+
 
 $application->run($input, $output);
