@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Advent of Code package.
+ *
+ * (c) Jonas Stendahl <jonas@stendahl.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+chdir(dirname(__DIR__));
+
+require_once 'vendor/autoload.php';
+
+use Boo\AdventOfCode\Commands;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+if (function_exists('date_default_timezone_set') === true && function_exists('date_default_timezone_get') === true) {
+    date_default_timezone_set(@date_default_timezone_get());
+}
+
+error_reporting(-1);
+ini_set('memory_limit', '-1');
+
+if (function_exists('ini_set') === true) {
+    @ini_set('display_errors', '1');
+}
+
+$application = new Application();
+$loader = new Twig_Loader_Filesystem('template');
+$twig = new Twig_Environment($loader, [
+    'auto_reload' => true,
+    'cache' => 'cache',
+    'debug' => false,
+    'strict_variables' => true,
+]);
+
+$application->add(new Commands\CreateSolverCommand($twig));
+$application->add(new Commands\SolveCommand($_SERVER['REQUEST_TIME_FLOAT']));
+
+
+$application->run(new ArgvInput($_SERVER['argv']), new ConsoleOutput());

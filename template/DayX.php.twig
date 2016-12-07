@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Advent of Code package.
+ *
+ * (c) Jonas Stendahl <jonas@stendahl.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Boo\AdventOfCode\Solvers\Year{{ year }};
+
+use Boo\AdventOfCode\ResultCollection;
+use Boo\AdventOfCode\SolverInterface;
+
+/**
+ * Day {{ day }}: {{ title|raw }}
+ *
+ * @see http://adventofcode.com/{{ year }}/day/{{ day }}
+ */
+final class Day{{ day }} implements SolverInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(string $input): ResultCollection
+    {
+        $input = explode("\n", $input);
+
+        return new ResultCollection(null, null);
+    }
+}
